@@ -27,14 +27,7 @@ func TestCreateMedias(t *testing.T) {
 				MediaTag:  apicommon.CategoryTagType(apicommon.MediaSourceType_MEDIA_SOURCE_TYPE_OTHER),
 			},
 			DomainGroupInfo: &apicommon.DomainGroupInfo{
-				DomainGroupType: apicommon.DomainGroupType_DOMAIN_GROUP_TYPE_PRIVATE,
-				DomainGroupId:   "0",
-			},
-			TranscodeInfo: &media.TranscodeInfo{
-				TranscodeFormat:  "mp4",
-				TranscodeBitRate: 600,
-				TranscodeWidth:   480,
-				TranscodeHeight:  360,
+				DomainGroupType: apicommon.DomainGroupType_DOMAIN_GROUP_TYPE_PUBLIC,
 			},
 			FileInfo: &media.FileInfo{
 				FileName: "test.mp4",
@@ -45,7 +38,8 @@ func TestCreateMedias(t *testing.T) {
 				Key:      "media/test/test_video/test-beijingninzao-6mins.mp4",
 			},
 			MediaWorkflowTemplateInfo: &media.MediaWorkflowTemplateInfo{
-				WorkflowMode: apicommon.WorkflowMode_WORKFLOW_MODE_CUSTOMER,
+				WorkflowMode:      apicommon.WorkflowMode_WORKFLOW_MODE_CUSTOMER,
+				AutoMatchTemplate: true,
 			},
 		},
 	}
