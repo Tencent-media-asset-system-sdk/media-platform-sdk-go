@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/Tencent-Ti/ti-sign-go v0.0.0-20210804071327-0c9e5761bac9
+	github.com/panjf2000/ants v1.3.0
 	github.com/tidwall/gjson v1.17.0
 	google.golang.org/protobuf v1.31.0
 )
