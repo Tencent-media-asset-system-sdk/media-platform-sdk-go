@@ -1924,6 +1924,61 @@ func (x *TimeInterval) GetEndTime() string {
 	return ""
 }
 
+type DayRange struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	StartDay string `protobuf:"bytes,1,opt,name=StartDay,proto3" json:"StartDay,omitempty"`
+	EndDay   string `protobuf:"bytes,2,opt,name=EndDay,proto3" json:"EndDay,omitempty"`
+}
+
+func (x *DayRange) Reset() {
+	*x = DayRange{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_common_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DayRange) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DayRange) ProtoMessage() {}
+
+func (x *DayRange) ProtoReflect() protoreflect.Message {
+	mi := &file_common_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DayRange.ProtoReflect.Descriptor instead.
+func (*DayRange) Descriptor() ([]byte, []int) {
+	return file_common_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *DayRange) GetStartDay() string {
+	if x != nil {
+		return x.StartDay
+	}
+	return ""
+}
+
+func (x *DayRange) GetEndDay() string {
+	if x != nil {
+		return x.EndDay
+	}
+	return ""
+}
+
 type TaskInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1953,7 +2008,7 @@ type TaskInfo struct {
 func (x *TaskInfo) Reset() {
 	*x = TaskInfo{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_common_proto_msgTypes[14]
+		mi := &file_common_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1966,7 +2021,7 @@ func (x *TaskInfo) String() string {
 func (*TaskInfo) ProtoMessage() {}
 
 func (x *TaskInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_common_proto_msgTypes[14]
+	mi := &file_common_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1979,7 +2034,7 @@ func (x *TaskInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TaskInfo.ProtoReflect.Descriptor instead.
 func (*TaskInfo) Descriptor() ([]byte, []int) {
-	return file_common_proto_rawDescGZIP(), []int{14}
+	return file_common_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *TaskInfo) GetTaskId() string {
@@ -2218,7 +2273,11 @@ var file_common_proto_rawDesc = []byte{
 	0x65, 0x72, 0x76, 0x61, 0x6c, 0x12, 0x1c, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x54, 0x69,
 	0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x54,
 	0x69, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x84, 0x06,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x45, 0x6e, 0x64, 0x54, 0x69, 0x6d, 0x65, 0x22, 0x3e, 0x0a,
+	0x08, 0x44, 0x61, 0x79, 0x52, 0x61, 0x6e, 0x67, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x53, 0x74, 0x61,
+	0x72, 0x74, 0x44, 0x61, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x53, 0x74, 0x61,
+	0x72, 0x74, 0x44, 0x61, 0x79, 0x12, 0x16, 0x0a, 0x06, 0x45, 0x6e, 0x64, 0x44, 0x61, 0x79, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x45, 0x6e, 0x64, 0x44, 0x61, 0x79, 0x22, 0x84, 0x06,
 	0x0a, 0x08, 0x54, 0x61, 0x73, 0x6b, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x16, 0x0a, 0x06, 0x54, 0x61,
 	0x73, 0x6b, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x54, 0x61, 0x73, 0x6b,
 	0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x54, 0x61, 0x73, 0x6b, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02,
@@ -2504,7 +2563,7 @@ func file_common_proto_rawDescGZIP() []byte {
 }
 
 var file_common_proto_enumTypes = make([]protoimpl.EnumInfo, 19)
-var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 15)
+var file_common_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
 var file_common_proto_goTypes = []interface{}{
 	(OperateStatus)(0),          // 0: trpc.media.common.OperateStatus
 	(CategoryTagType)(0),        // 1: trpc.media.common.CategoryTagType
@@ -2539,12 +2598,13 @@ var file_common_proto_goTypes = []interface{}{
 	(*Rectf)(nil),               // 30: trpc.media.common.Rectf
 	(*TranscodeMediaInfo)(nil),  // 31: trpc.media.common.TranscodeMediaInfo
 	(*TimeInterval)(nil),        // 32: trpc.media.common.TimeInterval
-	(*TaskInfo)(nil),            // 33: trpc.media.common.TaskInfo
-	(*structpb.Struct)(nil),     // 34: google.protobuf.Struct
+	(*DayRange)(nil),            // 33: trpc.media.common.DayRange
+	(*TaskInfo)(nil),            // 34: trpc.media.common.TaskInfo
+	(*structpb.Struct)(nil),     // 35: google.protobuf.Struct
 }
 var file_common_proto_depIdxs = []int32{
 	0,  // 0: trpc.media.common.OperateResponse.Status:type_name -> trpc.media.common.OperateStatus
-	34, // 1: trpc.media.common.TaskTemplate.Parameter:type_name -> google.protobuf.Struct
+	35, // 1: trpc.media.common.TaskTemplate.Parameter:type_name -> google.protobuf.Struct
 	20, // 2: trpc.media.common.WorkflowTemplate.TaskTemplateSet:type_name -> trpc.media.common.TaskTemplate
 	21, // 3: trpc.media.common.WorkflowTemplate.FlowDirectionSet:type_name -> trpc.media.common.FlowDirection
 	12, // 4: trpc.media.common.DomainGroupInfo.DomainGroupType:type_name -> trpc.media.common.DomainGroupType
@@ -2738,6 +2798,18 @@ func file_common_proto_init() {
 			}
 		}
 		file_common_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DayRange); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_common_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*TaskInfo); i {
 			case 0:
 				return &v.state
@@ -2756,7 +2828,7 @@ func file_common_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_common_proto_rawDesc,
 			NumEnums:      19,
-			NumMessages:   15,
+			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

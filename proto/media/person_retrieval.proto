@@ -45,6 +45,7 @@ message FaceInfo{
   string AttachPersonId = 10;
   repeated DetailStampInfo DetailStampInfoSet = 11;
   int32 Sensitive = 12;
+  float Confidence = 13;
 }
 
 message PersonRetrievalTaskData {

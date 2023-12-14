@@ -58,6 +58,7 @@ message DescribeTasksRequest {
   int32 PageSize = 2;
   repeated trpc.media.common.Filter FilterSet = 3;
   SortBy Sort = 4;
+  trpc.media.common.DayRange CreateDayRange = 5;                      // 筛选创建时间区间
 }
 
 message DescribeTasksResponse {

@@ -5,7 +5,7 @@ import "task_data.proto";
 
 package trpc.media.media;
 
-option go_package = "github.com/Tencent-media-asset-system-sdk/media-platform-sdk-go/protobuf-spec/media";
+option go_package = "github.com/Tencent-media-asset-system-sdk/media-platform-sdk-go/protobuf-spec/media/media";
 
 message MediaInfo {
   string ParentMediaId = 1;                                 // 父资源ID
@@ -161,6 +161,7 @@ message DescribeMediasRequest {
   uint32 Offset = 6;                                                       // 查询 Offset，优先用 PageNumber 和 PageSize
   uint32 Limit = 7;                                                        // 查询 Limit，优先用 PageNumber 和 PageSize
   bool IsDeleted = 8;                                                      // 回收站的过滤条件
+  trpc.media.common.DayRange CreateDayRange = 9;                      // 筛选创建时间区间
 }
 
 message DescribeMediasResponse {
@@ -248,6 +249,7 @@ message RetrieveHitInfo {
   repeated MediaSegment HitSegmentSet = 3;              // 被选中的片段集合
   MatchLevelType MatchLevel = 4;                        // 匹配级别
   AlgoType AlgoType = 5;                                // 命中的算法类型
+  string Key = 6;                                       // 如果命中自定义消息, 返回自定消息的 key
 }
 
 message RetrieveHitMedia {
@@ -487,6 +489,7 @@ enum SourceType {
   SOURCE_TYPE_FULLTEXT = 11;
   SOURCE_TYPE_FEATURE = 12;
   SOURCE_TYPE_MULTIMODAL = 13;
+  SOURCE_TYPE_CUSTOM_MESSAGE = 14;
 }
 
 message RetrievalMediaTagInfo{
@@ -517,6 +520,7 @@ message RetrieveEngineRetrieveHitInfo {
   repeated RetrieveEngineMediaSegment SegmentSet = 6 [json_name="segment_set"];// 媒体片段列表
   trpc.media.common.CategoryTagType MediaTag = 7 [json_name="media_tag"];      // 媒资标签
   MatchLevelType MatchLevel = 8 [json_name="match_level"];                     // 匹配级别
+  string Key = 9 [json_name="key"]; // 匹配到的自定义消息的 key
 }
 
 message FilterBy {
