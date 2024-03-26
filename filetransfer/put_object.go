@@ -28,12 +28,12 @@ func (c Client) PutObject(ctx context.Context, key string, filebuf []byte) (
 	canonicalQueryString := fmt.Sprintf("useJson=true&Bucket=&Key=%s&Content-MD5=%s", key, md5sum)
 	uri := fmt.Sprintf("http://%s:%d/FileManager/PutObject?%s", c.opt.Host, c.opt.Port, canonicalQueryString)
 	headerContent := tisign.HttpHeaderContent{
-		XTCAction:   "PutObject",                // 请求接口
-		XTCService:  "app-cdn4aowk",             // 接口所属服务名
-		XTCVersion:  "2021-02-26",               // 接口版本
-		ContentType: "application/octet-stream", // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
-		HttpMethod:  "PUT",                      // http请求方法，当前网关只支持: POST GET
-		Host:        c.opt.Host,                 // 访问网关的host
+		XTCAction:   "PutObject",                                  // 请求接口
+		XTCService:  "app-cdn4aowk",                               // 接口所属服务名
+		XTCVersion:  "2021-02-26",                                 // 接口版本
+		ContentType: "application/octet-stream",                   // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
+		HttpMethod:  "PUT",                                        // http请求方法，当前网关只支持: POST GET
+		Host:        fmt.Sprintf("%s:%d", c.opt.Host, c.opt.Port), // 访问网关的host
 	}
 	ts := tisign.NewTiSign(headerContent, c.opt.SecretId, c.opt.SecretKey)
 	header, _ := ts.CreateSignatureInfo()
