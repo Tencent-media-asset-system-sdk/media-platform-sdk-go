@@ -65,8 +65,8 @@ func (c Client) ListParts(ctx context.Context,
 	key, bucket, uploadID string) (response *ListPartsResponse, err error) {
 
 	rsp := &ListPartsResponse{}
-	uri := fmt.Sprintf("http://%s:%d/FileManager/ListParts?useJson=true&Bucket=%s&Key=%s&uploadId=%s",
-		c.opt.Host, c.opt.Port, bucket, key, uploadID)
+	uri := fmt.Sprintf("http://%s/FileManager/ListParts?useJson=true&Bucket=%s&Key=%s&uploadId=%s",
+		c.opt.GetEndpoint(), bucket, key, uploadID)
 
 	err = JsonGet(ctx, uri, nil, &rsp.Response)
 	if err != nil {

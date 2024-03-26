@@ -66,6 +66,14 @@ type Option struct {
 	Uin, SubAccountUin        string
 }
 
+func (m Option) GetEndpoint() string {
+	if m.Port == 0 || m.Port == 80 {
+		return m.Host
+	} else {
+		return fmt.Sprintf("%s:%d", m.Host, m.Port)
+	}
+}
+
 const (
 	defaultservice = "fusion-media-service"
 	defaultversion = "2022-03-02"
@@ -111,21 +119,21 @@ func (Client) Invoke(ctx context.Context, reqBody interface{}, rspBody interface
 		return fmt.Errorf("json UnMarshal req error: %v", err)
 	}
 	if opt[0].Inside {
-		uri = fmt.Sprintf("http://%s:%d/%s", opt[0].Host, opt[0].Port, action)
+		uri = fmt.Sprintf("http://%s/%s", opt[0].GetEndpoint(), action)
 		m["Uin"] = opt[0].Uin
 		m["SubAccountUin"] = opt[0].SubAccountUin
 	} else {
 		headerContent := tisign.HttpHeaderContent{
-			XTCAction:   action,                                         // 请求接口
-			XTCService:  service,                                        // 接口所属服务名
-			XTCVersion:  version,                                        // 接口版本
-			ContentType: "application/json",                             // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
-			HttpMethod:  "POST",                                         // http请求方法，当前网关只支持: POST GET
-			Host:        fmt.Sprintf("%s:%d", opt[0].Host, opt[0].Port), // 访问网关的host
+			XTCAction:   action,               // 请求接口
+			XTCService:  service,              // 接口所属服务名
+			XTCVersion:  version,              // 接口版本
+			ContentType: "application/json",   // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
+			HttpMethod:  "POST",               // http请求方法，当前网关只支持: POST GET
+			Host:        opt[0].GetEndpoint(), // 访问网关的host
 		}
 		m["TIProjectId"] = opt[0].TIProjectId
 		m["TIBusinessId"] = opt[0].TIBusinessId
-		uri = fmt.Sprintf("http://%s:%d/%s", opt[0].Host, opt[0].Port, gateway)
+		uri = fmt.Sprintf("http://%s/%s", opt[0].GetEndpoint(), gateway)
 		ts := tisign.NewTiSign(headerContent, opt[0].SecretId, opt[0].SecretKey)
 		header, _ = ts.CreateSignatureInfo()
 	}

@@ -68,15 +68,15 @@ func (c Client) UploadPart(ctx context.Context, bucket, key, uploadID string,
 
 	rsp := &UploadPartResponse{}
 	uri := fmt.Sprintf(
-		"http://%s:%d/FileManager/UploadPart?useJson=true&Bucket=%s&Key=%s&uploadId=%s&partNumber=%d&Content-MD5=%s",
-		c.opt.Host, c.opt.Port, bucket, url.QueryEscape(key), uploadID, partNumber, md5sum)
+		"http://%s/FileManager/UploadPart?useJson=true&Bucket=%s&Key=%s&uploadId=%s&partNumber=%d&Content-MD5=%s",
+		c.opt.GetEndpoint(), bucket, url.QueryEscape(key), uploadID, partNumber, md5sum)
 	headerContent := tisign.HttpHeaderContent{
-		XTCAction:   "UploadPart",                                 // 请求接口
-		XTCService:  "app-cdn4aowk",                               // 接口所属服务名
-		XTCVersion:  "2021-02-26",                                 // 接口版本
-		ContentType: "application/octet-stream",                   // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
-		HttpMethod:  "PUT",                                        // http请求方法，当前网关只支持: POST GET
-		Host:        fmt.Sprintf("%s:%d", c.opt.Host, c.opt.Port), // 访问网关的host
+		XTCAction:   "UploadPart",               // 请求接口
+		XTCService:  "app-cdn4aowk",             // 接口所属服务名
+		XTCVersion:  "2021-02-26",               // 接口版本
+		ContentType: "application/octet-stream", // http请求的content-type, 当前网关只支持: application/json  multipart/form-data
+		HttpMethod:  "PUT",                      // http请求方法，当前网关只支持: POST GET
+		Host:        c.opt.GetEndpoint(),        // 访问网关的host
 	}
 	ts := tisign.NewTiSign(headerContent, c.opt.SecretId, c.opt.SecretKey)
 	header, _ := ts.CreateSignatureInfo()
