@@ -52,7 +52,7 @@ func (c Client) DescribeUploadKey(ctx context.Context, filename string, fileSize
 		},
 	}
 
-	uri := fmt.Sprintf("http://%sFileManager/DescribeUploadKey?useJson=true", c.opt.GetEndpoint())
+	uri := fmt.Sprintf("http://%s/FileManager/DescribeUploadKey?useJson=true", c.opt.GetEndpoint())
 	ts := tisign.NewTiSign(headerContent, c.opt.SecretId, c.opt.SecretKey)
 	header, _ := ts.CreateSignatureInfo()
 	maxTry := 3
