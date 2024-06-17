@@ -35,6 +35,8 @@ message AppearTimeInfo {
   string StartFrameIndex = 5;
   string EndFrameIndex = 6;
   repeated AppearFrameInfo DetailFrames = 7;   //目标出现的位置信息
+  int32 Expression = 8;
+  float ExpressionConfidence = 9;
 }
 
 message AppearPostionInfo {
