@@ -2,10 +2,10 @@ package filetransfer_test
 
 import (
 	"context"
-	"io/ioutil"
 	"os"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/Tencent-media-asset-system-sdk/media-platform-sdk-go/filetransfer"
 	"github.com/Tencent-media-asset-system-sdk/media-platform-sdk-go/trpc_mock/client"
@@ -28,11 +28,14 @@ func TestUploadFile(t *testing.T) {
 		TIProjectId:  uint32(projectId),
 	})
 
-	if key, _, _, err := proxy.UploadFile(context.Background(), filePath, "测试文件1"); err != nil {
+	ctx, _ := context.WithTimeout(context.Background(), time.Hour)
+	start := time.Now()
+	if key, _, _, err := proxy.UploadFile(ctx, filePath, "测试文件1"); err != nil {
 		t.Fatalf("upload file error %v", err)
 	} else {
 		t.Logf("success upload file key %s", key)
 	}
+	t.Logf("upload time cost: %fs", time.Now().Sub(start).Seconds())
 }
 
 func TestUploadBuf(t *testing.T) {
@@ -52,7 +55,7 @@ func TestUploadBuf(t *testing.T) {
 		TIProjectId:  uint32(projectId),
 	})
 
-	buf, err := ioutil.ReadFile(filePath)
+	buf, err := os.ReadFile(filePath)
 	if err != nil {
 		t.Fatalf("file not found")
 	}
