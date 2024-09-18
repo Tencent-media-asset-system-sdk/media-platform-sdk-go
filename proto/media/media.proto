@@ -273,6 +273,7 @@ message RetrieveHitFace {
   float Quality = 13;
   float Confidence = 14;
   repeated string GroupIdSet = 15;
+  uint32 Total = 16;
 }
 
 message LexicalEntryInfo{

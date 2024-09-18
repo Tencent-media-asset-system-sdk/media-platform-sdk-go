@@ -87,6 +87,7 @@ message RetrievalImageFaces {
   float Quality = 13;
   float Confidence = 14;
   repeated string GroupIdSet = 15;
+  uint32 Total = 18;
 }
 
 message RetrievalImageRequest {
@@ -98,6 +99,8 @@ message RetrievalImageRequest {
   bool IsTimestampEnable = 6;
   bool IsAppearMediaEnable = 7;
   string LocalImagePath = 8;  // 内部使用
+  uint32 PageNumber = 9;
+  uint32 PageSize = 10;
 }
 
 message RetrievalImageResponse {
